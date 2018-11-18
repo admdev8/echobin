@@ -1,0 +1,8 @@
+% use Mojo::JSON qw/encode_json/;
+% my $res = $self->stash->{response};
+% if ( exists $res->{answer} ) {
+    <%== encode_json($res) =%>
+% }
+% elsif ( exists $res->{echo} ) {
+    <%== encode_json($res) =%>
+% }

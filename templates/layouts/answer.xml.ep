@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding="UTF-8"?>
+% my $res = $self->stash->{response};
+% if ( exists $res->{answer} ) {
+    % for my $i (keys %{$res}) {
+        <%= $self->b("<$i>". $res->{$i} ."</$i>") =%>
+    % }
+% }
+% elsif ( exists $res->{echo} ) {
+    % for my $i (keys %{$res}) {
+        <%= $self->b("<$i>". $res->{$i} ."</$i>") =%>
+    % }
+% }
+

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head><title>EchoBin answer</title></head>
+  <body>
+% my $res = $self->stash->{response};
+% if ( exists $res->{answer} ) {
+    <%= $res->{answer} =%>
+% }
+% elsif ( exists $res->{echo} ) {
+    <%= $res->{echo} =%>
+% }
+  </body>
+</html>
