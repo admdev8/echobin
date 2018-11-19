@@ -87,4 +87,11 @@ $status = 99;
 $t->get_ok("/status/$status")
     ->status_is(400);
 
+$ext = 'html';
+$status = q{200,400,500};
+my $re = $status;
+$re =~ s/,/|/g;
+$t->get_ok("/status/$status")
+    ->content_like(qr/$re/i);
+
 done_testing();
