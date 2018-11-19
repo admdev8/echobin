@@ -1,13 +1,15 @@
+% my $response = $self->stash->{response};
+% my $answer_block = begin
+% my $res = shift;
+% if ( exists $res->{answer} ) {
+<%= $res->{answer} =%>
+% }
+% elsif ( exists $res->{echo} ) {
+<%= $res->{echo} =%>
+% }
+% end
 <!DOCTYPE html>
 <html>
   <head><title>EchoBin answer</title></head>
-  <body>
-% my $res = $self->stash->{response};
-% if ( exists $res->{answer} ) {
-    <%= $res->{answer} =%>
-% }
-% elsif ( exists $res->{echo} ) {
-    <%= $res->{echo} =%>
-% }
-  </body>
+  <body><%= $answer_block->($response) =%></body>
 </html>

@@ -23,12 +23,7 @@ sub startup {
         method_name => qr/get|post|put|delete|patch|head/i,
     ])->to('Methods#answer', method_name => 'get');
 
-    $r->any('/status/:status_code', [
-        status_code => qr/\d\d\d/,
-    ])->to('Statuses#one_status', status_code => 200);
-
-    $r->any('/statuses/*status_code')
-    ->to('Statuses#more_statuses', status_code => q{200, 404, 500});
+    $r->any('/status/:status_code')->to('Statuses#answer', status_code => q{418});
 }
 
 1;

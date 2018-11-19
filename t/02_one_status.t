@@ -11,12 +11,13 @@ my $types = Mojolicious::Types->new;
 my ($status, $ext);
 
 $ext = 'html';
-$status = 200;
-$t->get_ok("/status")
-    ->status_is($status)
-    ->content_type_is($types->type($ext), 'Right content type is '. $ext)
-    ->content_like(qr/$status/);
 
+$t->get_ok("/status")
+    ->status_is(418)
+    ->content_type_is($types->type($ext), 'Right content type is '. $ext)
+    ->content_like(qr/418/);
+
+$status = 200;
 $t->get_ok("/status/$status")
     ->status_is($status)
     ->content_type_is($types->type($ext), 'Right content type is '. $ext)
@@ -84,6 +85,6 @@ $t->get_ok("/status/$status")
 
 $status = 99;
 $t->get_ok("/status/$status")
-    ->status_is(404);
+    ->status_is(400);
 
 done_testing();

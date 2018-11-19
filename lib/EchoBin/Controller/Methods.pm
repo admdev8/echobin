@@ -20,18 +20,22 @@ sub answer {
     if ( lc $route_method ne lc $request_method ) {
         $self->res->code(400);
         
-        $self->stash->{response} = {
-            'answer' => 'Bad request. Got method "'. $request_method .'" but requested method "'. $route_method .'".'
-        };
+        $self->stash(
+            response => {
+                answer => 'Bad request. Got method "'. $request_method .'" but requested method "'. $route_method .'".'
+            }
+        );
 
-        return $self->render('layouts/answer');
+        return $self->render('layouts/answer', format => 'html');
     }
 
     # (int) : [ 1 (fail) | 0 (success) ]
     unless ( $check_formats->($route_type) ) {
-        $self->stash->{response} = {
-            'echo' => $request_method
-        };
+        $self->stash(
+            response => {
+                echo => $request_method
+            }
+        );
     }
 
     return $self->render('layouts/answer', format => $route_type);

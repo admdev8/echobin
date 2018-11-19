@@ -17,7 +17,6 @@ $ext = 'html';
 $t->get_ok("/$method")
     ->status_is(200)
     ->header_is('Content-Type' => $types->type($ext))
-    ->content_type_is($types->type($ext), 'Right content type is '. $ext)
     ->content_like(qr/$method/i);
 
 
@@ -35,28 +34,25 @@ $ext = 'txt';
 $t->get_ok("/$method.$ext")
     ->status_is(200)
     ->header_is('Content-Type' => $types->type($ext))
-    ->content_type_is($types->type($ext), 'Right content type is '. $ext)
     ->content_like(qr/$method/i);
 
 $ext = 'json';
 $t->get_ok("/$method.$ext")
     ->status_is(200)
     ->header_is('Content-Type' => $types->type($ext))
-    ->content_type_is($types->type($ext), 'Right content type is '. $ext)
-    ->content_like(qr/$method/i);
+    ->content_like(qr/$method/i)
+    ->json_like('/echo' => qr/$method/i);
 
 $ext = 'html';
 $t->get_ok("/$method.$ext")
     ->status_is(200)
     ->header_is('Content-Type' => $types->type($ext))
-    ->content_type_is($types->type($ext), 'Right content type is '. $ext)
     ->content_like(qr/$method/i);
 
 $ext = 'xml';
 $t->get_ok("/$method.$ext")
     ->status_is(200)
     ->header_is('Content-Type' => $types->type($ext))
-    ->content_type_is($types->type($ext), 'Right content type is '. $ext)
     ->content_like(qr/$method/i);
 
 
@@ -66,35 +62,31 @@ $ext = 'txt';
 $t->get_ok("/$method", {'Content-Type' => $types->type($ext)})
     ->status_is(200)
     ->header_is('Content-Type' => $types->type($ext))
-    ->content_type_is($types->type($ext), 'Right content type is '. $ext)
     ->content_like(qr/$method/i);
 
 $ext = 'json';
 $t->get_ok("/$method", {'Content-Type' => $types->type($ext)})
     ->status_is(200)
     ->header_is('Content-Type' => $types->type($ext))
-    ->content_type_is($types->type($ext), 'Right content type is '. $ext)
-    ->content_like(qr/$method/i);
+    ->content_like(qr/$method/i)
+    ->json_like('/echo' => qr/$method/i);
 
 $ext = 'html';
 $t->get_ok("/$method", {'Content-Type' => $types->type($ext)})
     ->status_is(200)
     ->header_is('Content-Type' => $types->type($ext))
-    ->content_type_is($types->type($ext), 'Right content type is '. $ext)
     ->content_like(qr/$method/i);
 
 $ext = 'xml';
 $t->get_ok("/$method", {'Content-Type' => $types->type($ext)})
     ->status_is(200)
     ->header_is('Content-Type' => $types->type($ext))
-    ->content_type_is($types->type($ext), 'Right content type is '. $ext)
     ->content_like(qr/$method/i);
 
 $ext = 'html';
 $t->get_ok("/$method", {'Content-Type' => $types->type($ext)})
     ->status_is(200)
     ->header_is('Content-Type' => $types->type($ext))
-    ->content_type_is($types->type($ext), 'Right content type is '. $ext)
     ->content_like(qr/$method/i);
 
 
@@ -111,7 +103,8 @@ $ext = 'json';
 $t->get_ok("/$method.$ext", {'Content-Type' => $types->type('xml')})
     ->status_is(200)
     ->header_is('Content-Type' => $types->type($ext))
-    ->content_like(qr/$method/i);
+    ->content_like(qr/$method/i)
+    ->json_like('/echo' => qr/$method/i);
 
 $ext = 'html';
 $t->get_ok("/$method.$ext", {'Content-Type' => $types->type('txt')})
@@ -133,13 +126,13 @@ $method = 'post';
 $ext = 'txt';
 $t->get_ok("/$method.$ext", {'Content-Type' => $types->type($ext)})
     ->status_is(400)
-    ->header_is('Content-Type' => $types->type($ext))
+    ->header_is('Content-Type' => $types->type('html'))
     ->content_like(qr/$method/i);
 
 $ext = 'json';
 $t->get_ok("/$method.$ext", {'Content-Type' => $types->type($ext)})
     ->status_is(400)
-    ->header_is('Content-Type' => $types->type($ext))
+    ->header_is('Content-Type' => $types->type('html'))
     ->content_like(qr/$method/i);
 
 $ext = 'html';
@@ -149,9 +142,9 @@ $t->get_ok("/$method.$ext", {'Content-Type' => $types->type($ext)})
     ->content_like(qr/$method/i);
 
 $ext = 'xml';
-$t->get_ok("/$method.$ext", {'Content-Type' => $types->type($ext)})
+$t->get_ok("/$method.$ext", {'Content-Type' => $types->type('html')})
     ->status_is(400)
-    ->header_is('Content-Type' => $types->type($ext))
+    ->header_is('Content-Type' => $types->type('html'))
     ->content_like(qr/$method/i);
 
 done_testing();
